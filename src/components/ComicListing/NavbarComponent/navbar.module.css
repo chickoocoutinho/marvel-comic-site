@@ -7,4 +7,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	gap: 4rem;
+}
+
+.logo {
+	flex-shrink: 0;
+}
+
+.searchBar {
+	max-width: 20rem;
+}
+
+.searchIcon {
+	color: var(--grey-dark);
 }

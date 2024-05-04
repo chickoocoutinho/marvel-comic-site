@@ -1,9 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react()],
+	plugins: [
+		react(),
+		svgr({
+			include: "**/*.svg",
+		}),
+	],
 	define: {
 		// Mentioned in docs to use JSON.stringify https://vitejs.dev/config/shared-options.html#define
 		MARVEL_BASE_URL: JSON.stringify("https://gateway.marvel.com:443"),

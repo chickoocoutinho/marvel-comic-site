@@ -1,0 +1,10 @@
+.nav {
+	background-color: var(--primary);
+	padding: 0.5rem 0;
+}
+
+.navContent {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

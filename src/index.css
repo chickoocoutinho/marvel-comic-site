@@ -29,10 +29,22 @@ body {
 	--primary: #ec1c23;
 
 	--grey-dark: #555;
+	--grey-heighlight: #2c2828;
+	--grey-card: #373737;
+
+	--text-white: #f1f1f1;
+	--text-green: #789922;
 
 	--text-muted: #999;
 	--border-grey: #dadada;
 
 	--background: 1;
 	--foreground: 100;
+
+	--text-size-default: 1rem;
+	--text-size-large: 1.5rem;
+}
+
+p {
+	margin: 0;
 }

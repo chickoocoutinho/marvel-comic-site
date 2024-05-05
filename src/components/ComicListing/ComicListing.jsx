@@ -9,7 +9,6 @@ import styles from "./comicListing.module.css";
 const ComicListing = () => {
 	return (
 		<ComicDataContextProvider>
-			<ComicBackground className={styles.comicBackground} />
 			<div className={styles.root}>
 				<NavbarComponent />
 				<Container className={styles.content}>

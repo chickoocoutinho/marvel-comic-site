@@ -1,24 +1,33 @@
 import { useContext } from "react";
 import Card from "../../common/Card/Card";
-import Container from "../../common/Container/Container";
 import ComicDataContext from "../../../context/ComicDataContext";
 
 import styles from "./comicResults.module.css";
+import Pagination from "../../common/Pagination/Pagination";
 
 const ComicResults = () => {
-	const { data } = useContext(ComicDataContext);
+	const { data, goToPage, pageNo } = useContext(ComicDataContext);
 
 	return (
-		<div className={styles.root}>
-			{data.results.map((comic) => (
-				<Card
-					key={comic.id}
-					image={`${comic.thumbnail.path}/standard_fantastic.${comic.thumbnail.extension}`}
-					comicName={comic.name}
-					comicCount={comic.comicsCount}
-				/>
-			))}
-		</div>
+		<>
+			<div className={styles.root}>
+				<div className={styles.content}>
+					{data.results.map((comic) => (
+						<Card
+							key={comic.id}
+							image={`${comic.thumbnail.path}/standard_fantastic.${comic.thumbnail.extension}`}
+							comicName={comic.name}
+							comicCount={comic.comicsCount}
+						/>
+					))}
+				</div>
+			</div>
+			<Pagination
+				currentPage={pageNo}
+				totalPages={10}
+				handlePageChange={goToPage}
+			/>
+		</>
 	);
 };
 

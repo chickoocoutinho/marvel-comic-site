@@ -10,6 +10,7 @@ const ComicListing = () => {
 	return (
 		<ComicDataContextProvider>
 			<div className={styles.root}>
+				<div className={styles.comicBackground} />
 				<NavbarComponent />
 				<Container className={styles.content}>
 					<ComicResults />

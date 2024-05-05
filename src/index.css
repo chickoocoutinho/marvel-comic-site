@@ -27,10 +27,12 @@ body {
 
 :root {
 	--primary: #ec1c23;
+	--pagination-color: #555;
 
 	--grey-dark: #555;
 	--grey-heighlight: #2c2828;
 	--grey-card: #373737;
+	--grey-bg: #141414;
 
 	--text-white: #f1f1f1;
 	--text-green: #789922;

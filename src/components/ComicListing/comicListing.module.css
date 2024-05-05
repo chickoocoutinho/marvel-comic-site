@@ -1,11 +1,18 @@
 .root {
 	display: flex;
 	flex-direction: column;
+	background-color: var(--grey-bg);
 	height: 100%;
+}
+
+.comicBackground {
 	background-image: url("../../assets/comic-background.svg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: left;
+
+	position: fixed;
+	inset: 0;
 }
 
 .content {

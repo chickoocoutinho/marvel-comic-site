@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import Container from "../../common/Container/Container";
 
 const ComicResults = () => {
-	return <></>;
+	return <Container>saddsadsa</Container>;
 };
 
 export default ComicResults;

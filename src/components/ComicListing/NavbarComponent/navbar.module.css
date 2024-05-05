@@ -1,6 +1,7 @@
 .nav {
 	background-color: var(--primary);
 	padding: 0.5rem 0;
+	z-index: var(--foreground);
 }
 
 .navContent {

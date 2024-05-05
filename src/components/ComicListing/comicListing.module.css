@@ -5,6 +5,19 @@
 }
 
 .content {
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+	width: 100%;
 	flex: 1;
-	background-color: wheat;
+
+	z-index: var(--foreground);
+}
+
+.comicBackground {
+	position: fixed;
+	inset: 0;
+	filter: blur(2px);
+
+	z-index: var(--background);
 }

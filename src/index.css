@@ -32,4 +32,7 @@ body {
 
 	--text-muted: #999;
 	--border-grey: #dadada;
+
+	--background: 1;
+	--foreground: 100;
 }

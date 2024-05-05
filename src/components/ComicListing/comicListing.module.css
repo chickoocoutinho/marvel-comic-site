@@ -15,18 +15,6 @@
 	inset: 0;
 }
 
-.content {
-	display: flex;
-	flex-direction: column;
-	gap: 4rem;
-	width: 100%;
-	flex: 1;
-	padding-top: 4rem;
-	padding-bottom: 4rem;
-
-	z-index: var(--foreground);
-}
-
 .comicBackground {
 	position: fixed;
 	inset: 0;

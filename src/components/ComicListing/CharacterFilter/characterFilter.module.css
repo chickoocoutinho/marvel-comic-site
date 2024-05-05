@@ -1,0 +1,32 @@
+.root {
+	background-color: rgba(0, 0, 0, 0.2);
+
+	z-index: var(--foreground);
+	padding: 3rem 0;
+}
+
+.buttonRoot {
+	position: relative;
+}
+
+.imageButton {
+	position: relative;
+	border-radius: 50%;
+}
+
+.selected {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 30px;
+	border-radius: 50%;
+	z-index: var(--foreground);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.3);
+	fill: var(--light-blue);
+	cursor: pointer;
+}

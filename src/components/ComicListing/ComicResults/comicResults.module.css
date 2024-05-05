@@ -8,6 +8,18 @@
 	gap: 3rem;
 }
 
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+	width: 100%;
+	flex: 1;
+	padding-top: 3rem;
+	padding-bottom: 4rem;
+
+	z-index: var(--foreground);
+}
+
 @media (max-width: 75rem) {
 	.content {
 		grid-template-columns: repeat(3, 1fr);

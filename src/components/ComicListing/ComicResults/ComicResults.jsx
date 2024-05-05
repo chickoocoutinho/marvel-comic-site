@@ -1,15 +1,17 @@
 import { useContext } from "react";
+
 import Card from "../../common/Card/Card";
 import ComicDataContext from "../../../context/ComicDataContext";
+import Pagination from "../../common/Pagination/Pagination";
+import Container from "../../common/Container/Container";
 
 import styles from "./comicResults.module.css";
-import Pagination from "../../common/Pagination/Pagination";
 
 const ComicResults = () => {
 	const { data, goToPage, pageNo } = useContext(ComicDataContext);
 
 	return (
-		<>
+		<Container className={styles.container}>
 			<div className={styles.root}>
 				<div className={styles.content}>
 					{data.results.map((comic) => (
@@ -27,7 +29,7 @@ const ComicResults = () => {
 				totalPages={10}
 				handlePageChange={goToPage}
 			/>
-		</>
+		</Container>
 	);
 };
 

@@ -1,0 +1,52 @@
+.root {
+	position: relative;
+}
+
+.noScrollbars {
+	scroll-behavior: smooth;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+
+	&::-webkit-scrollbar {
+		width: 1px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: transparent;
+	}
+}
+
+.noScrollbars::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}
+
+.arrows {
+	position: absolute;
+	top: 0;
+	width: 3rem;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.01);
+	z-index: var(--foreground);
+	fill: rgba(255, 255, 255, 0.7);
+	transition: 0.2s;
+	border-radius: 0.5rem;
+}
+
+.arrows:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	fill: rgba(255, 255, 255, 1);
+}
+
+.arrowsLeft {
+	left: 0;
+	margin-left: -1rem;
+}
+
+.arrowsRight {
+	right: 0;
+	margin-right: -1rem;
+}

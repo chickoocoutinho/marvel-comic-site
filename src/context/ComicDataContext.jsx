@@ -8,6 +8,7 @@ import getCharacters from "../services/api/getCharacters";
 // })
 
 const QUERY_KEY_BASE = "COMICS";
+const CHARACTER = "CHARACTER";
 
 const ComicDataContext = createContext({});
 
@@ -22,6 +23,16 @@ export const ComicDataContextProvider = ({ children }) => {
 
 	const goToPage = (page) => {
 		setPageNo(page < 0 ? 9 : page);
+	};
+
+	const handleCharacterChange = (id) => {
+		setSelectedCharacters((characters) => {
+			if (characters.indexOf(id) === -1) {
+				return [...characters, id];
+			} else {
+				return characters.filter((character) => character !== id);
+			}
+		});
 	};
 
 	return (
@@ -476,6 +487,8 @@ export const ComicDataContextProvider = ({ children }) => {
 				isLoading,
 				goToPage,
 				pageNo,
+				handleCharacterChange,
+				selectedCharacters,
 			}}
 		>
 			{children}

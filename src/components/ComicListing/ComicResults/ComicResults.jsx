@@ -8,10 +8,17 @@ import Container from "../../common/Container/Container";
 import styles from "./comicResults.module.css";
 
 const ComicResults = () => {
-	const { data, goToPage, pageNo } = useContext(ComicDataContext);
+	const { data, goToPage, pageNo, selectedCharacters, handleFiltersClear } =
+		useContext(ComicDataContext);
 
 	return (
 		<Container className={styles.container}>
+			<div>
+				<h1>Selected Characters</h1>
+				{selectedCharacters.length !== 0 && (
+					<button onClick={handleFiltersClear}>selectedCharacters</button>
+				)}
+			</div>
 			<div className={styles.root}>
 				<div className={styles.content}>
 					{data.results.map((comic) => (

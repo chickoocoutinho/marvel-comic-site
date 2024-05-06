@@ -37,7 +37,7 @@ const CharacterFilter = () => {
 			],
 			[]
 		);
-	}, [characterData, selectedCharacters === 0]); //Sync States only when selected characters are cleared
+	}, [characterData, selectedCharacters]);
 
 	const handleCharacterClick = (character) => {
 		handleCharacterChange(character);
@@ -54,7 +54,7 @@ const CharacterFilter = () => {
 				/>
 			);
 		},
-		[characterData]
+		[characterDataItems]
 	);
 
 	const renderLoading = useCallback(() => {

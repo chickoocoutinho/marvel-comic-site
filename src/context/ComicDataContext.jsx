@@ -81,6 +81,10 @@ export const ComicDataContextProvider = ({ children }) => {
 		});
 	};
 
+	const handleFiltersClear = () => {
+		setSelectedCharacters([]);
+	};
+
 	return (
 		<ComicDataContext.Provider
 			value={{
@@ -534,6 +538,7 @@ export const ComicDataContextProvider = ({ children }) => {
 				pageNo,
 				handleCharacterChange,
 				selectedCharacters,
+				handleFiltersClear,
 
 				charactersPerPage: CHARACTER_LIMIT,
 				characterData,

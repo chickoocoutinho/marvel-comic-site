@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import getCharacters from "../services/api/getCharacters";
+import { useDebouncedQuery } from "../hooks/useDebouncedQuery";
 
 // getCharacters({
 // 	limit: 20,
@@ -58,9 +59,12 @@ export const ComicDataContextProvider = ({ children }) => {
 		data: d,
 		isError,
 		isLoading,
-	} = useQuery({
+	} = useDebouncedQuery({
 		queryKey: [QUERY_KEY_BASE, pageNo, ...selectedCharacters],
-		queryFn: () => null,
+		queryFn: () => {
+			console.log(selectedCharacters);
+			return Promise.resolve(1);
+		},
 	});
 
 	const goToPage = (page) => {
@@ -525,8 +529,7 @@ export const ComicDataContextProvider = ({ children }) => {
 						},
 					],
 				},
-				isError,
-				isLoading,
+
 				goToPage,
 				pageNo,
 				handleCharacterChange,

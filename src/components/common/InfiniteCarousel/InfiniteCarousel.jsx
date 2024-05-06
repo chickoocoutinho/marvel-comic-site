@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
@@ -81,4 +81,4 @@ const InfiniteCarousel = ({
 	);
 };
 
-export default InfiniteCarousel;
+export default memo(InfiniteCarousel);

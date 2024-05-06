@@ -1,17 +1,15 @@
-import { useContext, useMemo } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import Skeleton from "react-loading-skeleton";
-import clsx from "clsx";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import Container from "../../common/Container/Container";
 import ComicDataContext from "../../../context/ComicDataContext";
 import InfiniteCarousel from "../../common/InfiniteCarousel/InfiniteCarousel";
-import ImageButton from "../../common/Button/ImageButton";
 
-import CheckIcon from "../../../assets/check-solid.svg";
 import TriangleWarningIcon from "../../../assets/triangle-exclamation-solid.svg";
 import styles from "./characterFilter.module.css";
 import IconButton from "../../common/Button/IconButton";
+import CharacterComponent from "./CharacterComponent";
 
 const CharacterFilter = () => {
 	const {
@@ -27,36 +25,39 @@ const CharacterFilter = () => {
 	} = useContext(ComicDataContext);
 
 	const characterDataItems = useMemo(() => {
-		return characterData.pages.reduce((acc, current) => [...acc, ...current], []);
-	}, [characterData]);
+		const selectedCharactersMap = new Set(selectedCharacters);
+
+		return characterData.pages.reduce(
+			(acc, current) => [
+				...acc,
+				...current.map((element) => ({
+					isSelected: selectedCharactersMap.has(element.id),
+					...element,
+				})),
+			],
+			[]
+		);
+	}, [characterData, selectedCharacters === 0]); //Sync States only when selected characters are cleared
 
 	const handleCharacterClick = (character) => {
 		handleCharacterChange(character);
 	};
 
-	const renderComponent = (index) => {
-		const isSelected =
-			selectedCharacters.indexOf(characterDataItems[index].id) !== -1;
-		return (
-			<div className={styles.buttonRoot}>
-				{isSelected && (
-					<div
-						className={styles.selected}
-						onClick={() => handleCharacterClick(characterDataItems[index].id)}
-					>
-						<CheckIcon height="6rem" />
-					</div>
-				)}
-				<ImageButton
-					onClick={() => handleCharacterClick(characterDataItems[index].id)}
-					className={clsx(styles.imageButton, styles.placeholderBackground)}
-					src={characterDataItems[index].image}
+	const renderComponent = useCallback(
+		(index) => {
+			return (
+				<CharacterComponent
+					id={characterDataItems[index].id}
+					image={characterDataItems[index].image}
+					selected={characterDataItems[index].isSelected}
+					handleSelect={handleCharacterClick}
 				/>
-			</div>
-		);
-	};
+			);
+		},
+		[characterData]
+	);
 
-	const renderLoading = () => {
+	const renderLoading = useCallback(() => {
 		if (characterDataError) {
 			return (
 				<IconButton onClick={characterDataRefetch} className={styles.error}>
@@ -74,7 +75,7 @@ const CharacterFilter = () => {
 				width={200}
 			/>
 		);
-	};
+	}, [characterDataError]);
 
 	return (
 		<div className={styles.root}>

@@ -5,9 +5,9 @@ import ImageButton from "../../common/Button/ImageButton";
 import CheckIcon from "../../../assets/check-solid.svg";
 import styles from "./characterFilter.module.css";
 
-const CharacterComponent = ({ id, image, selected, handleSelect }) => {
+const CharacterComponent = ({ id, name, image, selected, handleSelect }) => {
 	const handleSelectClick = () => {
-		handleSelect(id);
+		handleSelect({ id, name });
 	};
 
 	return (

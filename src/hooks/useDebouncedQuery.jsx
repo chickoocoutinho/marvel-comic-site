@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const stringify = (obj) => JSON.stringify(obj);
 
-export const useDebouncedQuery = ({ queryKey, ...rest }, debounce = 1000) => {
+export const useDebouncedQuery = ({ debounceOn, queryKey, ...rest }, debounce = 1000) => {
 	const [newQueryKey, setNewQueryKey] = useState(queryKey);
 
 	useEffect(() => {
@@ -14,5 +14,5 @@ export const useDebouncedQuery = ({ queryKey, ...rest }, debounce = 1000) => {
 		}
 	}, [queryKey]);
 
-	return useQuery({ queryKey: newQueryKey, ...rest });
+	return useQuery({ queryKey: debounceOn ? newQueryKey : queryKey, ...rest });
 };

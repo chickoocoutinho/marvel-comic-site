@@ -20,6 +20,19 @@
 	z-index: var(--foreground);
 }
 
+.resultsHeading {
+	font-size: var(--text-size-xlarge);
+	color: var(--text-white);
+}
+
+.exploreText {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	gap: 2rem;
+}
+
 @media (max-width: 75rem) {
 	.content {
 		grid-template-columns: repeat(3, 1fr);
@@ -30,6 +43,15 @@
 @media (max-width: 48rem) {
 	.content {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.exploreText {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.exploreText button {
+		width: 100%;
 	}
 }
 

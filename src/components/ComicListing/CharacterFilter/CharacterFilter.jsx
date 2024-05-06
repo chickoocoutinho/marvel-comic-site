@@ -25,7 +25,9 @@ const CharacterFilter = () => {
 	} = useContext(ComicDataContext);
 
 	const characterDataItems = useMemo(() => {
-		const selectedCharactersMap = new Set(selectedCharacters);
+		const selectedCharactersMap = new Set(
+			selectedCharacters.map((character) => character.id)
+		);
 
 		return characterData.pages.reduce(
 			(acc, current) => [
@@ -48,6 +50,7 @@ const CharacterFilter = () => {
 			return (
 				<CharacterComponent
 					id={characterDataItems[index].id}
+					name={characterDataItems[index].name}
 					image={characterDataItems[index].image}
 					selected={characterDataItems[index].isSelected}
 					handleSelect={handleCharacterClick}

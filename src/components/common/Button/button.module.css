@@ -28,3 +28,15 @@
 	height: 100%;
 	width: 100%;
 }
+
+.normalButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: var(--text-size-normal);
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	padding: 0.5rem 1rem;
+}

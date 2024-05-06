@@ -6,19 +6,29 @@ import Pagination from "../../common/Pagination/Pagination";
 import Container from "../../common/Container/Container";
 
 import styles from "./comicResults.module.css";
+import Button from "../../common/Button/Button";
 
 const ComicResults = () => {
 	const { data, goToPage, pageNo, selectedCharacters, handleFiltersClear } =
 		useContext(ComicDataContext);
 
+	const selectedCharactersDisplayString = selectedCharacters.reduce(
+		(acc, current) => (acc += `, ${current.name}`),
+		""
+	);
+
 	return (
 		<Container className={styles.container}>
-			<div>
-				<h1>Selected Characters</h1>
-				{selectedCharacters.length !== 0 && (
-					<button onClick={handleFiltersClear}>selectedCharacters</button>
-				)}
-			</div>
+			{selectedCharacters.length !== 0 && (
+				<div className={styles.exploreText}>
+					<p className={styles.resultsHeading}>
+						Explore - {selectedCharactersDisplayString.slice(2)}
+					</p>
+
+					<Button onClick={handleFiltersClear}>Clear All Filters</Button>
+				</div>
+			)}
+
 			<div className={styles.root}>
 				<div className={styles.content}>
 					{data.results.map((comic) => (

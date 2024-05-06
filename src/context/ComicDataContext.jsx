@@ -60,9 +60,10 @@ export const ComicDataContextProvider = ({ children }) => {
 		isError,
 		isLoading,
 	} = useDebouncedQuery({
+		debounceOn: selectedCharacters.length !== 0,
 		queryKey: [QUERY_KEY_BASE, pageNo, ...selectedCharacters],
 		queryFn: () => {
-			console.log(selectedCharacters);
+			console.log(123);
 			return Promise.resolve(1);
 		},
 	});
@@ -71,12 +72,12 @@ export const ComicDataContextProvider = ({ children }) => {
 		setPageNo(page < 0 ? 9 : page);
 	};
 
-	const handleCharacterChange = (id) => {
+	const handleCharacterChange = ({ id, name }) => {
 		setSelectedCharacters((characters) => {
-			if (characters.indexOf(id) === -1) {
-				return [...characters, id];
+			if (characters.findIndex((character) => character.id === id) === -1) {
+				return [...characters, { id, name }];
 			} else {
-				return characters.filter((character) => character !== id);
+				return characters.filter((character) => character.id !== id);
 			}
 		});
 	};

@@ -30,3 +30,24 @@
 	fill: var(--light-blue);
 	cursor: pointer;
 }
+
+.placeholderBackground {
+	background-color: var(--grey-card);
+	height: 200px;
+	width: 200px;
+}
+
+.error {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 0.5rem;
+	font-size: var(--text-size-small);
+	color: var(--text-white);
+	border-radius: 50%;
+	background-color: var(--grey-card);
+	height: 200px;
+	width: 200px;
+	fill: var(--warning);
+}

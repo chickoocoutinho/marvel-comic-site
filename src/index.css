@@ -42,9 +42,12 @@ body {
 
 	--light-blue: #c4e2ec;
 
+	--warning: #ff9966;
+
 	--background: 1;
 	--foreground: 100;
 
+	--text-size-small: 0.8rem;
 	--text-size-default: 1rem;
 	--text-size-large: 1.5rem;
 }

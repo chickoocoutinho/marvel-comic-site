@@ -20,7 +20,7 @@ const InfiniteCarousel = ({
 	loadNextPage,
 	height,
 	itemSize,
-	loadingItem,
+	renderLoading,
 	renderComponent,
 	loadingBuffer = 10,
 }) => {
@@ -34,7 +34,7 @@ const InfiniteCarousel = ({
 
 	const Item = ({ index, style }) => {
 		if (!isItemLoaded(index)) {
-			return <div style={style}>{loadingItem}</div>;
+			return <div style={style}>{renderLoading()}</div>;
 		} else {
 			return <div style={style}>{renderComponent(index)}</div>;
 		}

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import getCharacters from "../services/api/getCharacters";
 
 // getCharacters({
@@ -10,13 +10,55 @@ import getCharacters from "../services/api/getCharacters";
 const QUERY_KEY_BASE = "COMICS";
 const CHARACTER = "CHARACTER";
 
+const CHARACTER_LIMIT = 20;
+
 const ComicDataContext = createContext({});
 
 export const ComicDataContextProvider = ({ children }) => {
+	const [maxCharacterCount, setMaxCharacterCount] = useState(0);
 	const [selectedCharacters, setSelectedCharacters] = useState([]);
 	const [pageNo, setPageNo] = useState(0);
 
-	const { data, isError, isLoading } = useQuery({
+	const {
+		data: characterData,
+		error: characterDataError,
+		fetchNextPage: characterDataFetchNextPage,
+		hasNextPage: characterDataHasNextPage,
+		isFetching: characterDataFetching,
+		refetch: characterDataRefetch,
+	} = useInfiniteQuery({
+		queryKey: [CHARACTER],
+		queryFn: ({ pageParam }) => {
+			return getCharacters({
+				limit: CHARACTER_LIMIT,
+				offset: pageParam * CHARACTER_LIMIT,
+			}).then((response) => {
+				setMaxCharacterCount(response.total);
+				return response.results.map((character) => ({
+					id: character.id,
+					name: character.name,
+					image: `${character.thumbnail.path}/standard_xlarge.${character.thumbnail.extension}`,
+				}));
+			});
+		},
+		initialPageParam: 0,
+		getNextPageParam: (lastPage, allPages, lastPageParam) => {
+			if (
+				lastPage.length === 0 ||
+				maxCharacterCount <= lastPageParam * CHARACTER_LIMIT + CHARACTER_LIMIT
+			) {
+				return undefined;
+			}
+			return lastPageParam + 1;
+		},
+		placeholderData: { pages: [] },
+	});
+
+	const {
+		data: d,
+		isError,
+		isLoading,
+	} = useQuery({
 		queryKey: [QUERY_KEY_BASE, pageNo, ...selectedCharacters],
 		queryFn: () => null,
 	});
@@ -489,6 +531,14 @@ export const ComicDataContextProvider = ({ children }) => {
 				pageNo,
 				handleCharacterChange,
 				selectedCharacters,
+
+				charactersPerPage: CHARACTER_LIMIT,
+				characterData,
+				characterDataError,
+				characterDataFetchNextPage,
+				characterDataHasNextPage,
+				characterDataFetching,
+				characterDataRefetch,
 			}}
 		>
 			{children}

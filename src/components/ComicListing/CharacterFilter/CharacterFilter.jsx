@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import Skeleton from "react-loading-skeleton";
+import clsx from "clsx";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import Container from "../../common/Container/Container";
@@ -8,34 +9,70 @@ import InfiniteCarousel from "../../common/InfiniteCarousel/InfiniteCarousel";
 import ImageButton from "../../common/Button/ImageButton";
 
 import CheckIcon from "../../../assets/check-solid.svg";
+import TriangleWarningIcon from "../../../assets/triangle-exclamation-solid.svg";
 import styles from "./characterFilter.module.css";
+import IconButton from "../../common/Button/IconButton";
 
 const CharacterFilter = () => {
-	const { data, handleCharacterChange, selectedCharacters } =
-		useContext(ComicDataContext);
+	const {
+		handleCharacterChange,
+		selectedCharacters,
+		charactersPerPage,
+		characterData,
+		characterDataError,
+		characterDataFetchNextPage,
+		characterDataHasNextPage,
+		characterDataFetching,
+		characterDataRefetch,
+	} = useContext(ComicDataContext);
+
+	const characterDataItems = useMemo(() => {
+		return characterData.pages.reduce((acc, current) => [...acc, ...current], []);
+	}, [characterData]);
 
 	const handleCharacterClick = (character) => {
 		handleCharacterChange(character);
 	};
 
 	const renderComponent = (index) => {
-		const isSelected = selectedCharacters.indexOf(data.results[index].id) !== -1;
+		const isSelected =
+			selectedCharacters.indexOf(characterDataItems[index].id) !== -1;
 		return (
 			<div className={styles.buttonRoot}>
 				{isSelected && (
 					<div
 						className={styles.selected}
-						onClick={() => handleCharacterClick(data.results[index].id)}
+						onClick={() => handleCharacterClick(characterDataItems[index].id)}
 					>
 						<CheckIcon height="6rem" />
 					</div>
 				)}
 				<ImageButton
-					onClick={() => handleCharacterClick(data.results[index].id)}
-					className={styles.imageButton}
-					src={`${data.results[index].thumbnail.path}/standard_xlarge.${data.results[index].thumbnail.extension}`}
+					onClick={() => handleCharacterClick(characterDataItems[index].id)}
+					className={clsx(styles.imageButton, styles.placeholderBackground)}
+					src={characterDataItems[index].image}
 				/>
 			</div>
+		);
+	};
+
+	const renderLoading = () => {
+		if (characterDataError) {
+			return (
+				<IconButton onClick={characterDataRefetch} className={styles.error}>
+					<TriangleWarningIcon height={60} />
+					<p>Click To Refresh</p>
+				</IconButton>
+			);
+		}
+		return (
+			<Skeleton
+				baseColor="var(--grey-dark)"
+				highlightColor="var(--grey-card)"
+				circle
+				height={200}
+				width={200}
+			/>
 		);
 	};
 
@@ -43,19 +80,15 @@ const CharacterFilter = () => {
 		<div className={styles.root}>
 			<Container>
 				<InfiniteCarousel
+					hasNextPage={characterDataHasNextPage}
+					isNextPageLoading={characterDataFetching}
+					items={characterDataItems}
+					loadNextPage={characterDataFetchNextPage}
 					height={220}
 					itemSize={230}
-					items={data.results}
 					renderComponent={renderComponent}
-					loadingItem={
-						<Skeleton
-							baseColor="var(--grey-dark)"
-							highlightColor="var(--grey-card)"
-							circle
-							height={200}
-							width={200}
-						/>
-					}
+					renderLoading={renderLoading}
+					loadingBuffer={charactersPerPage}
 				/>
 			</Container>
 		</div>

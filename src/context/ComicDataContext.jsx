@@ -19,6 +19,7 @@ export const ComicDataContextProvider = ({ children }) => {
 	const [maxCharacterCount, setMaxCharacterCount] = useState(0);
 	const [selectedCharacters, setSelectedCharacters] = useState([]);
 	const [pageNo, setPageNo] = useState(0);
+	const [searchString, setSearchString] = useState("");
 
 	const {
 		data: characterData,
@@ -61,7 +62,7 @@ export const ComicDataContextProvider = ({ children }) => {
 		isLoading,
 	} = useDebouncedQuery({
 		debounceOn: selectedCharacters.length !== 0,
-		queryKey: [QUERY_KEY_BASE, pageNo, ...selectedCharacters],
+		queryKey: [QUERY_KEY_BASE, pageNo, searchString, ...selectedCharacters],
 		queryFn: () => {
 			console.log(123);
 			return Promise.resolve(1);
@@ -69,7 +70,7 @@ export const ComicDataContextProvider = ({ children }) => {
 	});
 
 	const goToPage = (page) => {
-		setPageNo(page < 0 ? 9 : page);
+		setPageNo(page < 0 ? 0 : page);
 	};
 
 	const handleCharacterChange = ({ id, name }) => {
@@ -84,6 +85,11 @@ export const ComicDataContextProvider = ({ children }) => {
 
 	const handleFiltersClear = () => {
 		setSelectedCharacters([]);
+	};
+
+	const handleSearch = (search) => {
+		goToPage(0);
+		setSearchString(search);
 	};
 
 	return (
@@ -548,6 +554,9 @@ export const ComicDataContextProvider = ({ children }) => {
 				characterDataHasNextPage,
 				characterDataFetching,
 				characterDataRefetch,
+
+				searchString,
+				handleSearch,
 			}}
 		>
 			{children}

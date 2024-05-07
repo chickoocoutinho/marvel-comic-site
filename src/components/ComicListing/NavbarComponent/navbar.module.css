@@ -23,3 +23,8 @@
 .searchIcon {
 	color: var(--grey-dark);
 }
+
+.closeIcon {
+	padding: 0px 2px;
+	background-color: #fff;
+}

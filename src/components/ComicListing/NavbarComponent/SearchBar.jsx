@@ -1,15 +1,38 @@
-import TextField from "../../common/TextField/TextField";
+import { useCallback, useEffect, useState } from "react";
 
+import TextField from "../../common/TextField/TextField";
+import IconButton from "../../common/Button/IconButton";
+
+import debounce from "../../../utils/debounce";
 import styles from "./navbar.module.css";
 import SearchIcon from "../../../assets/search-solid.svg";
-import { useState } from "react";
+import CloseIcon from "../../../assets/xmark-solid.svg";
 
-//TODO: Sync Search with Parent
-const SearchBar = () => {
-	const [searchValue, setSearchValue] = useState("");
+const SearchBar = ({ handleSearch, defaultValue }) => {
+	const [searchValue, setSearchValue] = useState(defaultValue);
+
+	useEffect(() => {
+		if (!defaultValue) {
+			handleSearch("");
+		}
+	}, [defaultValue]);
+
+	const debouncedSearch = useCallback(
+		debounce((value) => {
+			handleSearch(value);
+		}),
+		[]
+	);
 
 	const handleSearchChange = (e) => {
-		setSearchValue(e.target.value);
+		const value = e.target.value;
+		setSearchValue(value);
+		debouncedSearch(value);
+	};
+
+	const handleSearchClear = () => {
+		setSearchValue("");
+		handleSearch("");
 	};
 
 	return (
@@ -20,6 +43,16 @@ const SearchBar = () => {
 				placeholder="Search for comics..."
 				value={searchValue}
 				onChange={handleSearchChange}
+				endElement={
+					searchValue !== "" && (
+						<IconButton
+							onClick={handleSearchClear}
+							className={styles.closeIcon}
+						>
+							<CloseIcon width={15} />
+						</IconButton>
+					)
+				}
 			/>
 		</>
 	);

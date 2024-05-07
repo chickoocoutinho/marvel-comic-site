@@ -22,6 +22,8 @@ const CharacterFilter = () => {
 		characterDataHasNextPage,
 		characterDataFetching,
 		characterDataRefetch,
+
+		searchString,
 	} = useContext(ComicDataContext);
 
 	const characterDataItems = useMemo(() => {
@@ -95,6 +97,7 @@ const CharacterFilter = () => {
 					loadingBuffer={charactersPerPage}
 				/>
 			</Container>
+			{searchString && <div className={styles.disabled} />}
 		</div>
 	);
 };

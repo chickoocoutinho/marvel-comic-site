@@ -88,7 +88,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Desktop View
 
-![homepage](./screenshots/home-page.png.png)
+![homepage](./screenshots/home-page.png)
 
 #### Pagination
 
@@ -100,7 +100,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Mobile View
 
-| ![mobile-home-page](./screenshots/mobile-view-home.jpg) | ![mobile-pagination](./screenshots/pagination-mobile.png) |
+| ![mobile-home-page](./screenshots/mobile-view-home.png) | ![mobile-pagination](./screenshots/pagination-mobile.png) |
 | ------------------------------------------------------- | --------------------------------------------------------- |
 
 ### Loading State

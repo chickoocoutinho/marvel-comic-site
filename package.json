@@ -14,7 +14,6 @@
     "@tanstack/react-query-devtools": "^5.32.1",
     "axios": "^1.6.8",
     "clsx": "^2.1.1",
-    "embla-carousel-react": "^8.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.4.0",

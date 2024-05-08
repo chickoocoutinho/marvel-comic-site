@@ -27,6 +27,8 @@ const CharacterFilter = () => {
 	} = useContext(ComicDataContext);
 
 	const characterDataItems = useMemo(() => {
+		if (!characterData) return [];
+
 		const selectedCharactersMap = new Set(
 			selectedCharacters.map((character) => character.id)
 		);
@@ -86,7 +88,9 @@ const CharacterFilter = () => {
 		<div className={styles.root}>
 			<Container>
 				<InfiniteCarousel
-					hasNextPage={characterDataHasNextPage}
+					hasNextPage={
+						characterDataItems.length === 0 || characterDataHasNextPage
+					}
 					isNextPageLoading={characterDataFetching}
 					items={characterDataItems}
 					loadNextPage={characterDataFetchNextPage}

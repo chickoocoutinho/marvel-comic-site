@@ -33,6 +33,25 @@
 	gap: 2rem;
 }
 
+.error {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 0.5rem;
+	font-size: var(--text-size-small);
+	color: var(--text-white);
+	border-radius: 4px;
+	background-color: var(--grey-card);
+	padding: 2rem 0;
+	width: 100%;
+	fill: var(--warning);
+}
+
+.loading {
+	margin: auto;
+}
+
 @media (max-width: 75rem) {
 	.content {
 		grid-template-columns: repeat(3, 1fr);

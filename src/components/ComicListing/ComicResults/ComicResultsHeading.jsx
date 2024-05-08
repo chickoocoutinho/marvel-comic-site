@@ -5,7 +5,6 @@ const ComicResultsHeading = ({
 	selectedCharacters = [],
 	handleFiltersClear,
 	searchString,
-	comicsDataLoading,
 }) => {
 	const selectedCharactersDisplayString = selectedCharacters.reduce(
 		(acc, current) => (acc += `, ${current.name}`),

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { useDebouncedQuery } from "../hooks/useDebouncedQuery";
 import getCharacters from "../services/api/getCharacters";
@@ -10,6 +10,7 @@ const CHARACTER = "CHARACTER";
 
 const CHARACTER_LIMIT = 20;
 
+// Centralised store for all applicaiton Data
 const ComicDataContext = createContext({});
 
 export const ComicDataContextProvider = ({ children }) => {
@@ -18,6 +19,7 @@ export const ComicDataContextProvider = ({ children }) => {
 	const [pageNo, setPageNo] = useState(1);
 	const [searchString, setSearchString] = useState("");
 
+	// Query to handle Infinite loading of Characted Data
 	const {
 		data: characterData,
 		error: characterDataError,
@@ -53,6 +55,7 @@ export const ComicDataContextProvider = ({ children }) => {
 		placeholderData: { pages: [] },
 	});
 
+	// Custom react- query hook to handle debouncing of filters for comics API
 	const {
 		data: comicsData,
 		isError: comicsDataError,

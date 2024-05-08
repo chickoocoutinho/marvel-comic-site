@@ -17,6 +17,7 @@ const SearchBar = ({ handleSearch, defaultValue }) => {
 		}
 	}, [defaultValue]);
 
+	// Debounced search bar to decouple search component from parent, for smarter rerenders
 	const debouncedSearch = useCallback(
 		debounce((value) => {
 			handleSearch(value);

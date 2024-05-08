@@ -6,6 +6,7 @@ export const GET_COMICS = "/v1/public/comics";
 // eslint-disable-next-line no-undef
 const apiService = axios.create({ baseURL: MARVEL_BASE_URL });
 
+// Request Inteceptor to add apiKey to each request
 apiService.interceptors.request.use(
 	function (config) {
 		config.params = {

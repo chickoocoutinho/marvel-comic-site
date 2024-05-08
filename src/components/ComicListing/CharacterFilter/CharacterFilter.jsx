@@ -49,6 +49,7 @@ const CharacterFilter = () => {
 		handleCharacterChange(character);
 	};
 
+	// Functions and values passed to the infinite Carousel need to be memorised to improve performance and reduce rerenders
 	const renderComponent = useCallback(
 		(index) => {
 			return (
@@ -101,7 +102,9 @@ const CharacterFilter = () => {
 					loadingBuffer={charactersPerPage}
 				/>
 			</Container>
-			{searchString && <div className={styles.disabled} />}
+			{searchString && ( //When Search string is entered, disable characters select
+				<div className={styles.disabled} />
+			)}
 		</div>
 	);
 };

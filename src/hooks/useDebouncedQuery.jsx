@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const stringify = (obj) => JSON.stringify(obj);
 
+//Custom use Query hook to handled debouncing
 export const useDebouncedQuery = ({ debounceOn, queryKey, ...rest }, debounce = 1000) => {
 	const [newQueryKey, setNewQueryKey] = useState(queryKey);
 

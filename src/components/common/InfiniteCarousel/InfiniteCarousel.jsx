@@ -13,6 +13,7 @@ import styles from "./infinityCarousel.module.css";
 
 const SCROLL_BUTTON_OFFSET = 100;
 
+// Custom Virtualised Infinite Carousel using react window
 const InfiniteCarousel = ({
 	hasNextPage,
 	isNextPageLoading,
